@@ -22,4 +22,5 @@ class TransactionService:
 
     def display_transactions(self):
         input("TODO: Transaction list")
+        print('eme')
 
