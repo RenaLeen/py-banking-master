@@ -1,0 +1,28 @@
+{
+  "transactions": [
+    {
+      "transaction_id": "T001",
+      "account_number": "12345678901",
+      "date": "2025-04-01",
+      "type": "deposit",
+      "amount": 1000,
+      "balance_after": 1500.50
+    },
+    {
+      "transaction_id": "T002",
+      "account_number": "12345678901",
+      "date": "2025-04-03",
+      "type": "withdrawal",
+      "amount": 500,
+      "balance_after": 1000.50
+    },
+    {
+      "transaction_id": "T003",
+      "account_number": "98765432102",
+      "date": "2025-04-02",
+      "type": "deposit",
+      "amount": 2000,
+      "balance_after": 2500.75
+    }
+  ]
+}

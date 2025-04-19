@@ -1,0 +1,22 @@
+{
+  "loans": [
+    {
+      "loan_id": "L001",
+      "customer_id": "CUST001",
+      "loan_amount": 5000.00,
+      "loan_status": "approved",
+      "repayment_status": "pending",
+      "loan_date": "2025-03-01",
+      "repayment_date": "2025-06-01"
+    },
+    {
+      "loan_id": "L002",
+      "customer_id": "CUST002",
+      "loan_amount": 10000.00,
+      "loan_status": "pending",
+      "repayment_status": "not started",
+      "loan_date": "2025-04-10",
+      "repayment_date": "2025-07-10"
+    }
+  ]
+}

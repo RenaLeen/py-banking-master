@@ -1,0 +1,38 @@
+{
+  "accounts": [
+    {
+      "account_number": "12345678901",  
+      "customer_id": "CUST001",  
+      "account_type": "savings",  
+      "balance": 1500.50,  
+      "transactions": [
+        {
+          "date": "2025-04-01",
+          "type": "deposit",
+          "amount": 1000,
+          "balance_after": 1500.50
+        },
+        {
+          "date": "2025-04-03",
+          "type": "withdrawal",
+          "amount": 500,
+          "balance_after": 1000.50
+        }
+      ]
+    },
+    {
+      "account_number": "98765432102",
+      "customer_id": "CUST002",
+      "account_type": "checking",
+      "balance": 2500.75,
+      "transactions": [
+        {
+          "date": "2025-04-02",
+          "type": "deposit",
+          "amount": 2000,
+          "balance_after": 2500.75
+        }
+      ]
+    }
+  ]
+}

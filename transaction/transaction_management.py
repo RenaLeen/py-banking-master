@@ -1,25 +1,24 @@
-from typing import List
-from loan import Loan, LoanPayment
-from account import BankAccount
+from utils import load_json, save_json
 
 class Transaction:
-    type: str # deposit| withdraw| transfer
-    date: str
-    amount: float
+    def __init__(self, type: str, date: str, amount: float):
+        self.type = type
+        self.date = date
+        self.amount = amount
 
 class TransactionService:
-    transactions: List[Transaction] = []
+    transactions: list = load_json("transactions.json")
 
-    def __init__(self, account: BankAccount):
-        self._account = account
-    
-    def deposit(self):
-        input("TODO: deposit action")
+    def deposit(self, amount: float):
+        transaction = Transaction("deposit", "today", amount)
+        self.transactions.append(transaction.__dict__)
+        save_json("transactions.json", self.transactions)
 
-    def withdrawal(self):
-        input("TODO: withdrawal action")
-    
+    def withdrawal(self, amount: float):
+        transaction = Transaction("withdraw", "today", amount)
+        self.transactions.append(transaction.__dict__)
+        save_json("transactions.json", self.transactions)
 
     def display_transactions(self):
-        input("TODO: Transaction list")
-
+        for transaction in self.transactions:
+            print(transaction)

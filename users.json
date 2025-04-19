@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "id": 101,
+            "full_name": "John Doe",
+            "date_of_birth": "1990-05-15",
+            "address": "123 Main St, City, Country",
+            "email": "johndoe@email.com",
+            "phone_number": "09123456789",
+            "id_number": "123456789012",
+            "password": "1234",
+            "customer_id": "CUST001"
+        },
+        {
+            "id": 102,
+            "full_name": "Jane Smith",
+            "date_of_birth": "1985-10-25",
+            "address": "456 Elm St, City, Country",
+            "email": "janesmith@email.com",
+            "phone_number": "09187654321",
+            "id_number": "987654321098",
+            "password": "5678",
+            "customer_id": "CUST002"
+        }
+    ]
+}

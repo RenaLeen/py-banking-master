@@ -1,86 +1,81 @@
-from typing import List
-from .bank_account import BankAccount
-from loan import handle_loan_option
-from utils import clear_console
-from transaction import TransactionService
+# accounts/account_management.py
 
-class AccountService:
-    current_account: BankAccount | None = None
-    accounts:List[BankAccount] = list()   
+import json
+import os
+from utils.utility import clear_console
 
-    def create_account(self):
-        input("TODO:create account:")
-        #replace the following temporary code
-        self.current_account = BankAccount();
-        self.accounts.append(self.current_account)
-    
-    def select_account(self):
-        input("TODO:list account and select") 
-        
-    def find_account(self, id: int) -> BankAccount|None:
-        print("TODO:find account:", id) 
-        return None
-    # TODO: Other methods such as (balance_inquery)
+ACCOUNTS_FILE = "data/accounts.json"
 
-account_service = AccountService()
+def load_accounts():
+    if not os.path.exists(ACCOUNTS_FILE):
+        return {}
+    with open(ACCOUNTS_FILE, "r") as f:
+        return json.load(f)
 
-EXIT, WITHDRAW, DEPOSIT, BALANCE, SELECT, SERVICES = (0, 1, 2, 3, 4, 5)
-'''
-Main Account Menu
-'''
-def print_account_menu():
-    print("Bank Account Options:")
-    print(f"\t{WITHDRAW} : Withdraw")
-    print(f"\t{DEPOSIT} : Deposit")
-    print(f"\t{BALANCE} : Balance")
-    print(f"\t{SELECT} : Select Other Account")
-    print(f"\t{SERVICES} : Services")
-    #other options here
-    print(f"\t{EXIT} : Exit")
+def save_accounts(accounts):
+    with open(ACCOUNTS_FILE, "w") as f:
+        json.dump(accounts, f, indent=4)
 
-CREATE_ACCOUNT, LOAN = (1, 2)
-'''
-Main Account Sub Menu: Services 
-'''
-def print_services_options():
-    print('Services Options:')
-    print(f"\t{CREATE_ACCOUNT} : CREATE NEW ACCOUNT")
-    print(f"\t{LOAN} : LOAN SERVICES")
-    #other options here
-    print(f"\t{EXIT} : Exit")
-
-
-def handle_services_option():
-    option = CREATE_ACCOUNT 
-    while option != EXIT:
-        print_services_options()
-        option = int(input("\n\tCommand: "))
-        if option == CREATE_ACCOUNT:
-            account_service.create_account()
-        elif option == LOAN:
-            clear_console()
-            handle_loan_option(account_service.current_account)
-        # handle other options here
+def handle_account_option(username):
+    while True:
         clear_console()
+        print(f"===== Account Management for {username} =====")
+        print("1. View Account")
+        print("2. Create Account")
+        print("3. Delete Account")
+        print("4. Back")
 
+        choice = input("Enter your choice: ")
 
-def handle_account_option():
-    option = SERVICES
-    transaction_service: TransactionService
-    if len(account_service.accounts) == 0:
-        account_service.create_account()
-        
-    while option != EXIT and account_service.current_account != None:
-        transaction_service = TransactionService(account_service.current_account)
-        print_account_menu()
-        option = int(input("\n\tCommand: "))
-        if option == SERVICES:
-            clear_console()
-            handle_services_option()
-        elif option == SELECT:
-            account_service.select_account()
-        elif option == WITHDRAW:
-            transaction_service.withdrawal()
-        # handle other options here
-        clear_console()
+        if choice == "1":
+            view_account(username)
+        elif choice == "2":
+            create_account(username)
+        elif choice == "3":
+            delete_account(username)
+        elif choice == "4":
+            break
+        else:
+            print("Invalid choice.")
+            input("Press Enter to continue...")
 
+def view_account(username):
+    accounts = load_accounts()
+    account = accounts.get(username)
+    clear_console()
+    if account:
+        print("=== Account Info ===")
+        for key, value in account.items():
+            print(f"{key.capitalize()}: {value}")
+    else:
+        print("No account found for this user.")
+    input("\nPress Enter to return...")
+
+def create_account(username):
+    accounts = load_accounts()
+    if username in accounts:
+        print("Account already exists.")
+    else:
+        account_number = input("Enter new account number: ")
+        balance = float(input("Enter initial balance: "))
+        accounts[username] = {
+            "account_number": account_number,
+            "balance": balance
+        }
+        save_accounts(accounts)
+        print("Account created successfully.")
+    input("Press Enter to return...")
+
+def delete_account(username):
+    accounts = load_accounts()
+    if username in accounts:
+        confirm = input("Are you sure you want to delete your account? (yes/no): ").lower()
+        if confirm == "yes":
+            del accounts[username]
+            save_accounts(accounts)
+            print("Account deleted.")
+        else:
+            print("Deletion cancelled.")
+    else:
+        print("No account to delete.")
+    input("Press Enter to return...")
