@@ -1,0 +1,20 @@
+[
+    {
+        "transaction_type": "Deposit",
+        "amount": 500.00,
+        "description": "Salary",
+        "timestamp": "2025-05-10 10:00:00"
+    },
+    {
+        "transaction_type": "Withdrawal",
+        "amount": 200.00,
+        "description": "ATM Withdrawal",
+        "timestamp": "2025-05-11 14:30:00"
+    },
+    {
+        "transaction_type": "Transfer",
+        "amount": 300.00,
+        "description": "Transferred to savings",
+        "timestamp": "2025-05-12 16:45:00"
+    }
+]
